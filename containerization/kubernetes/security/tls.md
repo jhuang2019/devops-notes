@@ -1,0 +1,47 @@
+# TLS
+
+## TLS Basics
+### What is a certificate
+* A certificate is used to guarantee trust between two parties during a transaction. 
+* For example, when a user tries to access a web server, TLS certificates ensure that
+the communication between the user and the seerver is encrypted and the server is who it says it is.
+
+### What is TLS
+* TLS stands for transport layer security. It is a cryptographic protocol that provides end-to-end security of data sent between applications over the Internet. 
+* TLS certificates ensure that the communication between the user and the server is encrypted and the server is who it says it is.
+
+### What is a CA
+* It stands for certificate authority
+* They're well known organizations that can sign and validate your certificates for you.
+
+### Symmetric Encryption
+* It uses a secret key that can either be a number, a word or a string of random letters. 
+* It encrypts and decrypts using the same secret key. 
+* A sender encrypts the data with the public key and then send the encrypted data and the public key to the receiver. The receiver uses the public key to decrypt the data.
+* The sender and the receiver should know the secret key that is used to encrypt and decrypt all the messages.
+* Refer to: https://www.trentonsystems.com/blog/symmetric-vs-asymmetric-encryption
+
+### Asymmetric Encryption
+* It uses two keys, i.e. a public and a private key. 
+* A message encrypted with a public key can only be decrypted with the corresponding private key.
+* We generate a public and private key pair on the receiver.
+* A sender encrypts the data with the public key which is got from the receiver, and then sends the encrypted data to the receiver. The receiver descrypts the data with the private key.
+* Refer to: https://www.trentonsystems.com/blog/symmetric-vs-asymmetric-encryption
+
+### How TLS works
+* The client device sends an initial message (Client Hello) to the destination server. It includes the version of TLS it supports as well as the cryptographic algorithms it supports (cipher suite).
+* The server responds with a Server Hello message that includes its corresponding certificate with its public key.
+* The client device verifies the server’s TLS certificate.
+* The client device then creates a pre-master secret that’s encrypted using the public key.
+* The server decrypts the pre-master secret with its own private key.
+* Both the client device and server confirm that the process has been completed and have a symmetric (master) key that can now be used for encryption and decryption.
+* The handshake uses asymmetric encryption. Once the process is complete, symmetric encryption is used to send data safely and securely.
+* Refer to: https://www.digicert.com/how-tls-ssl-certificates-work, https://sematext.com/glossary/ssl-tls-handshake/ and https://www.avast.com/c-what-is-transport-layer-security
+
+
+
+## TLS in Kubernetes
+
+## View Certificate Details
+### openssl commands
+### base64 decode and encode
