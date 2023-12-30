@@ -13,20 +13,21 @@ the communication between the user and the seerver is encrypted and the server i
 ### What is a CA
 * It stands for certificate authority
 * They're well known organizations that can sign and validate your certificates for you.
+* CA has its own set of public and private key pairs that it uses to sign server certificates.
+* There are three types of certificates, including server certificates configured on the servers, root certificate configured on the CA servers, and the
+ client certificates configured on the clients.
 
 ### Symmetric Encryption
 * It uses a secret key that can either be a number, a word or a string of random letters. 
 * It encrypts and decrypts using the same secret key. 
 * A sender encrypts the data with the public key and then send the encrypted data and the public key to the receiver. The receiver uses the public key to decrypt the data.
 * The sender and the receiver should know the secret key that is used to encrypt and decrypt all the messages.
-* Refer to: https://www.trentonsystems.com/blog/symmetric-vs-asymmetric-encryption
 
 ### Asymmetric Encryption
 * It uses two keys, i.e. a public and a private key. 
 * A message encrypted with a public key can only be decrypted with the corresponding private key.
 * We generate a public and private key pair on the receiver.
 * A sender encrypts the data with the public key which is got from the receiver, and then sends the encrypted data to the receiver. The receiver descrypts the data with the private key.
-* Refer to: https://www.trentonsystems.com/blog/symmetric-vs-asymmetric-encryption
 
 ### How TLS works
 * The client device sends an initial message (Client Hello) to the destination server. It includes the version of TLS it supports as well as the cryptographic algorithms it supports (cipher suite).
@@ -36,12 +37,47 @@ the communication between the user and the seerver is encrypted and the server i
 * The server decrypts the pre-master secret with its own private key.
 * Both the client device and server confirm that the process has been completed and have a symmetric (master) key that can now be used for encryption and decryption.
 * The handshake uses asymmetric encryption. Once the process is complete, symmetric encryption is used to send data safely and securely.
-* Refer to: https://www.digicert.com/how-tls-ssl-certificates-work, https://sematext.com/glossary/ssl-tls-handshake/ and https://www.avast.com/c-what-is-transport-layer-security
-
-
 
 ## TLS in Kubernetes
+There are three type of certificates below.
+* root certificate configured on the CA servers
+    * ca.key and ca.crt
+* server certificates configured on the servers. Each client certificate has crt and key.
+    * etcdserver
+    * apiserver (kube-api server)
+    * kubelet (kubelet server)
+* client certificates configured on the clients
+    * admin
+    * scheduler
+    * controller-manager 
+    * kube-proxy
+    * apiserver-kubelet-client
+    * kubelet-client
+* The process for each certificate is below.
+    * generate keys
+    * certificate signing requests
+    * sign certificates
+* manage TLS certifictes in a cluster
+    * Trusting TLS in a cluster
+    * Requesting a certificate
+        * create a certificate signing request
+        * create a CertificateSigningRequest object to send to the Kubernetes API
+        * get the CertificateSigningRequest approved
+    * sign the CertificatesSigningRequest
+        * create a certificate authority
+        * issue a certificate
+        * uploade the signed certificate
+    * download the certificate and use it
+
 
 ## View Certificate Details
 ### openssl commands
 ### base64 decode and encode
+
+## References
+* https://www.trentonsystems.com/blog/symmetric-vs-asymmetric-encryption
+* https://www.digicert.com/how-tls-ssl-certificates-work
+* https://sematext.com/glossary/ssl-tls-handshake/
+* https://www.avast.com/c-what-is-transport-layer-security
+* https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/
+* https://pleasantpasswords.com/info/pleasant-password-server/b-server-configuration/3-installing-a-3rd-party-certificate/openssl-commands
