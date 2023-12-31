@@ -53,10 +53,19 @@ There are three type of certificates below.
     * kube-proxy
     * apiserver-kubelet-client
     * kubelet-client
-* The process for each certificate is below.
-    * generate keys
-    * certificate signing requests
-    * sign certificates
+* The process to create certificate is below.
+    * generate keys (.key)
+    ```
+    openssl genrsa -out a.key 2048
+    ```
+    * certificate signing requests (.csr)
+    ```
+    openssl req -new -key a.key -subj "/CN=xxx-CA" -out b.csr
+    ```
+    * sign certificates (.crt)
+    ```
+    openssl x509 -req -in b.csr -signkey a.key -out c.crt
+    ```
 * manage TLS certifictes in a cluster
     * Trusting TLS in a cluster
     * Requesting a certificate
