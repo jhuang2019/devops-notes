@@ -32,5 +32,39 @@ This section is used to list some important concepts and commands on computer ne
 * ping: ping can be used to test DNS resolution. For example, ping www.google.com.
 * nslookup: query a host name from a DNS server. For example, nslookup www.google.com.
 * dig: Another useful tool to list DNS name resolution.
-* curl
-* nz
+* curl: It stands for "Client URL". curl is a command line tool that enables data transfer over various network protocols.
+    * -v: Makes curl verbose during the operation
+    ```
+    curl -v https://example.com 
+    ```
+    * -k: Allow curl to work with insecure connections. This option makes curl skip the verification step and proceed without checking.
+    ```
+    curl -k https://example.com 
+    ```
+    * -H: Specify an additional header to be sent in the HTTP request. 
+      ```
+      curl -H "X-First-Name: abc" https://example.com 
+      ```
+    * Obtain only headers.
+    ```
+    curl -I https://example.com 
+    ```
+    * -x or --proxy: Use the specified proxy.
+    ```
+    curl --proxy http://proxy.example https://example.com
+    ```
+* nc: Netcat command is a command-line utility for reading and writing data between two computer networks. 
+    * The basic syntax for the nc command is:
+    ```
+    nc [<options>] <host> <port>
+    ```
+    * some important options are below.
+        * -v: Sets verbosity level.
+        * -z: Report connection status without establishing a connection.
+
+## References
+* https://curl.se/docs/manpage.html
+* https://everything.curl.dev/cmdline/options
+* https://phoenixnap.com/kb/curl-command
+* https://www.computerhope.com/unix/nc.htm
+* https://phoenixnap.com/kb/nc-command

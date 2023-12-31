@@ -53,7 +53,7 @@ There are three type of certificates below.
     * kube-proxy
     * apiserver-kubelet-client
     * kubelet-client
-* The process to create certificate is below.
+* The process to create certificates is below.
     * generate keys (.key)
     ```
     openssl genrsa -out a.key 2048
@@ -62,7 +62,7 @@ There are three type of certificates below.
     ```
     openssl req -new -key a.key -subj "/CN=xxx-CA" -out b.csr
     ```
-    * sign certificates (.crt)
+    * sign certificates (.crt and this is the cert.)
     ```
     openssl x509 -req -in b.csr -signkey a.key -out c.crt
     ```
@@ -75,13 +75,45 @@ There are three type of certificates below.
     * sign the CertificatesSigningRequest
         * create a certificate authority
         * issue a certificate
-        * uploade the signed certificate
+        * upload the signed certificate
     * download the certificate and use it
 
 
 ## View Certificate Details
 ### openssl commands
+* The showcerts flag appended onto the openssl s_client and connect command, and show the entire certificate chain in PEM format.
+```
+openssl s_client -showcerts -connect <domain name>:port number
+```
+* The x509 command is a multi purpose certificate utility. It can be used to display certificate information. 
+* The -text prints out the certificate in text form, , including its public key, signature algorithms, etc.
+```
+openssl s_client -showcerts -connect <domain name>:port number | openssl x509 -text
+```
+* The -noout flag is used to prevent the output of the encoded version of the request.
+```
+openssl req -in xx.csr -noout -text
+```
+
+## Misc
 ### base64 decode and encode
+* Base64 is used to encode binary data 
+* Base64 encode example
+```
+echo Hi | base64
+```
+The output is below.
+```
+SGkK
+```
+* Base64 decode example
+```
+echo SGkK | base64 -d
+```
+The output is below.
+```
+Hi
+```
 
 ## References
 * https://www.trentonsystems.com/blog/symmetric-vs-asymmetric-encryption
@@ -90,3 +122,9 @@ There are three type of certificates below.
 * https://www.avast.com/c-what-is-transport-layer-security
 * https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/
 * https://pleasantpasswords.com/info/pleasant-password-server/b-server-configuration/3-installing-a-3rd-party-certificate/openssl-commands
+* https://www.digicert.com/kb/ssl-support/openssl-quick-reference-guide.htm
+* https://www.ibm.com/support/pages/qradar-how-verify-certifcate-connections-using-openssl
+* https://www.freecodecamp.org/news/openssl-command-cheatsheet-b441be1e8c4a/
+* https://www.sslshopper.com/article-most-common-openssl-commands.html
+* https://www.freecodecamp.org/news/what-is-base64-encoding/
+* https://www.redhat.com/sysadmin/base64-encoding
