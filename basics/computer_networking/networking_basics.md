@@ -45,7 +45,7 @@ This section is used to list some important concepts and commands on computer ne
       ```
       curl -H "X-First-Name: abc" https://example.com 
       ```
-    * Obtain only headers.
+    * -I: Obtain only headers.
     ```
     curl -I https://example.com 
     ```
