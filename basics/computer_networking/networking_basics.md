@@ -9,15 +9,16 @@ This section is used to list some important concepts and commands on computer ne
 * Gateway: Gateway is a door to th outside world, to the other networks or to the Internet. 
 
 ## DNS
+
 * Name Resolution: Translating host names to IP addresses, i.e. process of associating names and IP addresses.
 * DNS Server: Domain Name system server which translates domain names into IP addresses.
 * Record Types
 
-| Record Type | web-server | Example   | Comments   |
-| :-------:   | :---:      | :-------: |  :-------: |
-| A      | web-server     | 192.168.1.1 | Stores IP addresses to hostnames |
-| AAAA   | web-server     | 2001:xx:xx:xx| Stores IPv6 addresses to host names |
-| CNAME  | food.web-server | eat.web-server,hungry.web-server | mapping one name to another name |
+| Record Type |   web-server    |             Example              |              Comments               |
+| :---------: | :-------------: | :------------------------------: | :---------------------------------: |
+|      A      |   web-server    |           192.168.1.1            |  Stores IP addresses to hostnames   |
+|    AAAA     |   web-server    |          2001:xx:xx:xx           | Stores IPv6 addresses to host names |
+|    CNAME    | food.web-server | eat.web-server,hungry.web-server |  mapping one name to another name   |
 
 ## Private IP addreses, NAT, Public IP addresses
 ###  Private IP address: It is not routable on the Internet.
